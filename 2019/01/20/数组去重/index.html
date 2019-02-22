@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述：本文主要介绍了数组去重的几种简单方式1. 最基本的去重方式说明：新建一个数组，遍历原数组，新数组中没有相同的值就把原数组的值push进去，返回新数组。注意：IE8以下不支持数组的indexof方法 1234567891011function uniq(arr) &amp;#123;    var newArr = [];    for (var i = 0; i &amp;lt; arr.length; i">
+<meta name="keywords" content="js基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组去重">
+<meta property="og:url" content="http://yoursite.com/2019/01/20/数组去重/index.html">
+<meta property="og:site_name" content="littlewu">
+<meta property="og:description" content="概述：本文主要介绍了数组去重的几种简单方式1. 最基本的去重方式说明：新建一个数组，遍历原数组，新数组中没有相同的值就把原数组的值push进去，返回新数组。注意：IE8以下不支持数组的indexof方法 1234567891011function uniq(arr) &amp;#123;    var newArr = [];    for (var i = 0; i &amp;lt; arr.length; i">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-20T10:02:33.294Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数组去重">
+<meta name="twitter:description" content="概述：本文主要介绍了数组去重的几种简单方式1. 最基本的去重方式说明：新建一个数组，遍历原数组，新数组中没有相同的值就把原数组的值push进去，返回新数组。注意：IE8以下不支持数组的indexof方法 1234567891011function uniq(arr) &amp;#123;    var newArr = [];    for (var i = 0; i &amp;lt; arr.length; i">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/20/数组去重/">
+
+
+
+
+
+  <title>数组去重 | littlewu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">littlewu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Welcome to my blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/20/数组去重/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="littlewu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lw.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="littlewu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数组去重</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-20T16:16:00+08:00">
+                2019-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><h3 id="本文主要介绍了数组去重的几种简单方式"><a href="#本文主要介绍了数组去重的几种简单方式" class="headerlink" title="本文主要介绍了数组去重的几种简单方式"></a>本文主要介绍了数组去重的几种简单方式</h3><h4 id="1-最基本的去重方式"><a href="#1-最基本的去重方式" class="headerlink" title="1. 最基本的去重方式"></a>1. 最基本的去重方式</h4><p><strong>说明：</strong>新建一个数组，遍历原数组，新数组中没有相同的值就把原数组的值push进去，返回新数组。<br><strong>注意</strong>：IE8以下不支持数组的indexof方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function uniq(arr) &#123;</span><br><span class="line">    var newArr = [];</span><br><span class="line">    for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">        if (newArr.indexOf(arr[i]) == -1) &#123;</span><br><span class="line">            newArr.push(arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return newArr;</span><br><span class="line">&#125;</span><br><span class="line">var arr = [1, 2, 2, 4, 9, 6, 7, 5, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果：[1, 2, 4, 9, 6, 7, 5, 3]</p>
+<h4 id="2-先排序，再去重"><a href="#2-先排序，再去重" class="headerlink" title="2. 先排序，再去重"></a>2. 先排序，再去重</h4><p><strong>说明：</strong>使用数组的sort方法给数组排序，排序后相同的值相邻，遍历数组，只需要判断每一项的值是否和前一项的值相同，不同就push到新数组中。<br><strong>注意</strong>：此方法会打乱原来数组的顺序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function uniq(arr) &#123;</span><br><span class="line">    arr.sort();</span><br><span class="line">    console.log(arr);</span><br><span class="line">    &lt;!-- 创建新数组存储原始数组的第一个值 --&gt;</span><br><span class="line">    var newArr = [arr[0]];</span><br><span class="line">    for (var i = 1; i &lt; arr.length; i++) &#123;</span><br><span class="line">        if (arr[i] !== newArr[newArr.length - 1]) &#123;</span><br><span class="line">            newArr.push(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return newArr</span><br><span class="line">&#125;</span><br><span class="line">var arr = [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果:<br>使用sort方法排序后的数组 [1, “2”, 2, 2, 3, 4, 5, 5, 6, 9, “a”, “a”]<br>去重后的新数组 [1, “2”, 2, 3, 4, 5, 6, 9, “a”]</p>
+<h4 id="3-利用下标查询"><a href="#3-利用下标查询" class="headerlink" title="3. 利用下标查询"></a>3. 利用下标查询</h4><p><strong>说明：</strong>遍历数组，如果当前数组的第i项在当前数组中第一次出现的位置不是i，表示第i项是重复的，忽略掉。否则，存入新数组中。<br><strong>注意：</strong>还是得调用indexOf方法，性能和方法1差不多</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function uniq(arr) &#123;</span><br><span class="line">    var newArr = [];</span><br><span class="line">    for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">        &lt;!-- 利用indexof只能判断一次数组中元素出现的位置索引 --&gt;</span><br><span class="line">        if (arr.indexOf(arr[i]) == i) &#123;</span><br><span class="line">            newArr.push(arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return newArr;</span><br><span class="line">&#125;</span><br><span class="line">var arr = [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果： [1, 2, “2”, 4, 9, “a”, 3, 5, 6]</p>
+<h4 id="4-优化遍历数组法-推荐的方法"><a href="#4-优化遍历数组法-推荐的方法" class="headerlink" title="4.优化遍历数组法(推荐的方法)"></a>4.优化遍历数组法(推荐的方法)</h4><p><strong>说明：</strong>利用双重for循环，遍历数组。获取没重复的最后值放入到新数组中。(检测到有重复的值时终止当前循环同时进入外层循环的下一轮判断)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function uniq(array) &#123;</span><br><span class="line">    var newArr = [];</span><br><span class="line">    var index = [];</span><br><span class="line">    var len= array.length;</span><br><span class="line">    for (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        for (var j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">            if (array[i] === array[j]) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        newArr.push(array[i]);</span><br><span class="line">        index.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(index);</span><br><span class="line">    return newArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = [1, 2, 2, 3, 5, 3, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br>数组中元素的索引   [0, 2, 5, 6, 7]<br>去重后的数组       [1, 2, 3, 6, 5]</p>
+<h4 id="5-对象键值法去重"><a href="#5-对象键值法去重" class="headerlink" title="5.对象键值法去重"></a>5.对象键值法去重</h4><p><strong>说明：</strong>该方法执行的速度比其他任何方法都快， 就是占用的内存大一些。<br>新建一js对象以及新数组，遍历传入数组时，判断值是否为js对象的键，<br>不是的话给对象新增该键并放入新数组。<br><strong>注意：</strong><br>判断是否为js对象键时，会自动对传入的键执行“toString()”，<br>不同的键可能会被误认为一样，例如n[val]– n[1]、n[“1”]；<br>解决上述问题还是得调用“indexOf”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function uniq(array) &#123;</span><br><span class="line">    var obj = &#123;&#125;,</span><br><span class="line">        newArr= [],</span><br><span class="line">        len = array.length,</span><br><span class="line">        val, type;</span><br><span class="line">    for (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        val = array[i];</span><br><span class="line">        type = typeof val;</span><br><span class="line">        // 将数组的每一项封装为对象的属性名进行判断，利用对象的属性名的唯一性，判断对象中是否有这个属性，如果没有就把属性名对应的数组项添加到新的数组中去</span><br><span class="line">        if (!obj[val]) &#123;</span><br><span class="line">            // 对象的属性值为数组每一项的数据类型，封装到一个数组中</span><br><span class="line">            obj[val] = [type];</span><br><span class="line">            newArr.push(val);</span><br><span class="line">        &#125; else if (obj[val].indexOf(type) &lt; 0) &#123;</span><br><span class="line">            obj[val].push(type);</span><br><span class="line">            newArr.push(val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(obj)</span><br><span class="line">    return newArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr= [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br>   对象的结果<br>   {1: Array(1), 2: Array(2), 3: Array(1), 4: Array(1), 5: Array(1), 6: Array(1), 9: Array(1), a: Array(1)}<br>                1: [“number”]<br>                2: (2) [“number”, “string”]<br>                3: [“number”]<br>                4: [“number”]<br>                5: [“number”]<br>                6: [“number”]<br>                9: [“number”]<br>                a: [“string”]<br>                <strong>proto</strong>: Object<br>    去重后的数组  [1, 2, “2”, 4, 9, “a”, 3, 5, 6]</p>
+<h4 id="6-利用数组原型对象上的includes方法"><a href="#6-利用数组原型对象上的includes方法" class="headerlink" title="6.利用数组原型对象上的includes方法"></a>6.利用数组原型对象上的includes方法</h4><p><strong>说明：</strong>判断新数组中是否包含旧数组中的元素，如果不包含push到新数组中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function uniq(array) &#123;</span><br><span class="line">   var newArr=[];</span><br><span class="line">   for(var i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">       if(!newArr.includes(arr[i]))&#123;</span><br><span class="line">           newArr.push(arr[i])</span><br><span class="line">       &#125;</span><br><span class="line">   &#125; </span><br><span class="line">    return newArr;</span><br><span class="line">&#125;</span><br><span class="line">var arr= [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果：[1, 2, “2”, 4, 9, “a”, 3, 5, 6]</p>
+<h4 id="7-利用数组原型对象上的filter和includes方法"><a href="#7-利用数组原型对象上的filter和includes方法" class="headerlink" title="7.利用数组原型对象上的filter和includes方法"></a>7.利用数组原型对象上的filter和includes方法</h4><p><strong>说明：</strong>利用filter方法过滤掉重复的数组项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function uniq(array) &#123;</span><br><span class="line">   var newArr=[]</span><br><span class="line">    newArr=arr.filter((item)=&gt;&#123;</span><br><span class="line">        return newArr.includes(item)?&apos;&apos;:newArr.push(item);</span><br><span class="line">    &#125;);</span><br><span class="line">    return newArr;</span><br><span class="line">&#125;</span><br><span class="line">var arr= [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果：[1, 2, “2”, 4, 9, “a”, 3, 5, 6]</p>
+<h4 id="8-利用数组原型对象上的forEach和includes方法"><a href="#8-利用数组原型对象上的forEach和includes方法" class="headerlink" title="8.利用数组原型对象上的forEach和includes方法"></a>8.利用数组原型对象上的forEach和includes方法</h4><p><strong>说明：</strong>利用forEach方法遍历数组，将不重复的数组push到新数组中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function uniq(array) &#123;</span><br><span class="line">   var newArr=[]</span><br><span class="line">    arr.forEach((item)=&gt;&#123;</span><br><span class="line">        newArr.includes(item)?&apos;&apos;:newArr.push(item);</span><br><span class="line">    &#125;);</span><br><span class="line">    return newArr;</span><br><span class="line">&#125;</span><br><span class="line">var arr= [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果：[1, 2, “2”, 4, 9, “a”, 3, 5, 6]</p>
+<h4 id="9-利用数组原型对象上的splice方法-执行速度最慢"><a href="#9-利用数组原型对象上的splice方法-执行速度最慢" class="headerlink" title="9.利用数组原型对象上的splice方法(执行速度最慢)"></a>9.利用数组原型对象上的splice方法(执行速度最慢)</h4><p><strong>说明：</strong>遍历数组，利用splice方法，将重复的数据项剔除。返回值即为删除后的新数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function uniq(arr) &#123;</span><br><span class="line">    var i,</span><br><span class="line">        j,</span><br><span class="line">        len = arr.length;</span><br><span class="line">    for (i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        for (j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">            if (arr[i] === arr[j]) &#123;</span><br><span class="line">                arr.splice(j, 1);</span><br><span class="line">                len--;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br><span class="line">var arr = [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果： [1, 2, “2”, 4, 9, “a”, 3, 5, 6]</p>
+<h4 id="10-利用Es6的set方法"><a href="#10-利用Es6的set方法" class="headerlink" title="10.利用Es6的set方法"></a>10.利用Es6的set方法</h4><p><strong>说明：</strong>利用ES6提供的新的数据结构Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function uniq(arr) &#123;</span><br><span class="line">    //Set数据结构，它类似于数组，其成员的值都是唯一的</span><br><span class="line">    return Array.from(new Set(arr)); // 利用Array.from将Set结构转换成数组</span><br><span class="line"></span><br><span class="line">var arr = [1, 2, &quot;2&quot;, 4, 9, &quot;a&quot;, &quot;a&quot;, 2, 3, 5, 6, 5];</span><br><span class="line">console.log(uniq(arr));</span><br></pre></td></tr></table></figure>
+<p>执行结果： [1, 2, “2”, 4, 9, “a”, 3, 5, 6]</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js基础/" rel="tag"># js基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/js中常见的遍历方法/" rel="next" title="js中常见的遍历方法">
+                <i class="fa fa-chevron-left"></i> js中常见的遍历方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/20/js中的闭包/" rel="prev" title="js中的闭包">
+                js中的闭包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/lw.jpg" alt="littlewu">
+            
+              <p class="site-author-name" itemprop="name">littlewu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述："><span class="nav-number">1.</span> <span class="nav-text">概述：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文主要介绍了数组去重的几种简单方式"><span class="nav-number">1.1.</span> <span class="nav-text">本文主要介绍了数组去重的几种简单方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-最基本的去重方式"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 最基本的去重方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-先排序，再去重"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 先排序，再去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-利用下标查询"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 利用下标查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-优化遍历数组法-推荐的方法"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.优化遍历数组法(推荐的方法)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-对象键值法去重"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.对象键值法去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-利用数组原型对象上的includes方法"><span class="nav-number">1.1.6.</span> <span class="nav-text">6.利用数组原型对象上的includes方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-利用数组原型对象上的filter和includes方法"><span class="nav-number">1.1.7.</span> <span class="nav-text">7.利用数组原型对象上的filter和includes方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-利用数组原型对象上的forEach和includes方法"><span class="nav-number">1.1.8.</span> <span class="nav-text">8.利用数组原型对象上的forEach和includes方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-利用数组原型对象上的splice方法-执行速度最慢"><span class="nav-number">1.1.9.</span> <span class="nav-text">9.利用数组原型对象上的splice方法(执行速度最慢)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-利用Es6的set方法"><span class="nav-number">1.1.10.</span> <span class="nav-text">10.利用Es6的set方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">littlewu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

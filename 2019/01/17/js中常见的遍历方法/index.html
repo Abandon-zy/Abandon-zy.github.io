@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaScript中常用循环语句的详解前言：本文简单介绍了JavaScript中常见的几种循环方法的用法和一般使用场景。 1. for循环1234var arr = [&amp;apos;nick&amp;apos;,&amp;apos;freddy&amp;apos;,&amp;apos;mike&amp;apos;,&amp;apos;james&amp;apos;];for(var i = 0, len=arr.length; i&amp;lt;len; i+">
+<meta name="keywords" content="js基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中常见的遍历方法">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/js中常见的遍历方法/index.html">
+<meta property="og:site_name" content="littlewu">
+<meta property="og:description" content="JavaScript中常用循环语句的详解前言：本文简单介绍了JavaScript中常见的几种循环方法的用法和一般使用场景。 1. for循环1234var arr = [&amp;apos;nick&amp;apos;,&amp;apos;freddy&amp;apos;,&amp;apos;mike&amp;apos;,&amp;apos;james&amp;apos;];for(var i = 0, len=arr.length; i&amp;lt;len; i+">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpG71e.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpGIfO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpJKc4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpUGse.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpUWiq.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpam6S.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpayp6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpaHc8.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpdAHJ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpwFRP.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpw8MT.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpNMjg.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/17/kpNhKe.png">
+<meta property="og:updated_time" content="2019-01-17T09:29:00.696Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中常见的遍历方法">
+<meta name="twitter:description" content="JavaScript中常用循环语句的详解前言：本文简单介绍了JavaScript中常见的几种循环方法的用法和一般使用场景。 1. for循环1234var arr = [&amp;apos;nick&amp;apos;,&amp;apos;freddy&amp;apos;,&amp;apos;mike&amp;apos;,&amp;apos;james&amp;apos;];for(var i = 0, len=arr.length; i&amp;lt;len; i+">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/01/17/kpG71e.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/js中常见的遍历方法/">
+
+
+
+
+
+  <title>js中常见的遍历方法 | littlewu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">littlewu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Welcome to my blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/js中常见的遍历方法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="littlewu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lw.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="littlewu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js中常见的遍历方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T17:26:47+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="JavaScript中常用循环语句的详解"><a href="#JavaScript中常用循环语句的详解" class="headerlink" title="JavaScript中常用循环语句的详解"></a>JavaScript中常用循环语句的详解</h2><p>前言：本文简单介绍了JavaScript中常见的几种循环方法的用法和一般使用场景。</p>
+<h3 id="1-for循环"><a href="#1-for循环" class="headerlink" title="1. for循环"></a>1. for循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&apos;nick&apos;,&apos;freddy&apos;,&apos;mike&apos;,&apos;james&apos;];</span><br><span class="line">for(var i = 0, len=arr.length; i&lt;len; i++)&#123;</span><br><span class="line">    console.log(i+&apos;. &apos;+arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpG71e.png" alt="kpG71e.png"><br><strong>说明：</strong>for循环，通过累加数组索引，来输出数组中的值。（使用比较局限，一般只用于循环数组）</p>
+<h3 id="2-forEach方法"><a href="#2-forEach方法" class="headerlink" title="2.forEach方法"></a>2.forEach方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&apos;nick&apos;,&apos;freddy&apos;,&apos;mike&apos;,&apos;james&apos;];</span><br><span class="line">arr.forEach(function(item,i,arr)&#123;</span><br><span class="line">    console.log(item);</span><br><span class="line">    console.log(i);</span><br><span class="line">    console.log(arr);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpGIfO.png" alt="kpGIfO.png"><br><strong>说明：</strong>forEach循环，跟for循环有点相似，不过会更优美，可通过参数直接获取到值，arr.forEach(function(item,i,arr){})，其中item为该索引下的值，i为索引，arr为数组本身，参数名可改变，但是顺序不能改变。</p>
+<h3 id="3-for-in方法"><a href="#3-for-in方法" class="headerlink" title="3.for in方法"></a>3.for in方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&apos;nick&apos;,&apos;freddy&apos;,&apos;mike&apos;,&apos;james&apos;];</span><br><span class="line">var userMsg = &#123;</span><br><span class="line">	nick: &#123;</span><br><span class="line">		name: &apos;nick&apos;,</span><br><span class="line">		age: 18,</span><br><span class="line">		sex: &apos;男&apos;	</span><br><span class="line">	&#125;,</span><br><span class="line">	freddy: &#123;</span><br><span class="line">		name: &apos;freddy&apos;,</span><br><span class="line">		age: 24,</span><br><span class="line">		sex: &apos;男&apos;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;;</span><br><span class="line">for(var i in arr)&#123;	</span><br><span class="line">	console.log(i+&apos;. &apos;+arr[i]);</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;-----------分割线-----------&apos;);</span><br><span class="line">for(var i1 in userMsg)&#123;</span><br><span class="line">	console.log(i1);	</span><br><span class="line">	for(var i2 in userMsg[i1])&#123;</span><br><span class="line">		console.log(i2+&apos;: &apos;+userMsg[i1][i2]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpJKc4.png" alt="kpJKc4.png"><br><strong>说明：</strong>相较于for循环，for in的功能会更加强大一些，使用范围也会更广，不但可以循环遍历数组，还可以循环遍历对象。代码中的i，i1，i2分别是目标对象（数组）中的键值（数组中叫习惯叫索引）。arr数组中的i分别0,1,2,3，userMsg对象下的i1分别是”nick”、”freddy”的键值, i3就是userMsg.nick和userMsg.freddy下的键值了，为”name”、”age”、”sex”。（for in在写法上会稍微复杂些，不过他很清晰的展示了循环过程）。</p>
+<h3 id="4-for-of方法"><a href="#4-for-of方法" class="headerlink" title="4.for of方法"></a>4.for of方法</h3><ol>
+<li>使用例子1：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&apos;nick&apos;,&apos;freddy&apos;,&apos;mike&apos;,&apos;james&apos;];</span><br><span class="line">for(var item of arr)&#123;	</span><br><span class="line">    console.log(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpUGse.png" alt="kpUGse.png"><br><strong>说明：</strong>遍历数组里的每一项</p>
+<ol>
+<li>使用例子2：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var arr = [</span><br><span class="line">&#123; name:&apos;nick&apos;, age:18 &#125;,</span><br><span class="line">&#123; name:&apos;freddy&apos;, age:24 &#125;,</span><br><span class="line">&#123; name:&apos;mike&apos;, age:26 &#125;,</span><br><span class="line">&#123; name:&apos;james&apos;, age:34 &#125;</span><br><span class="line">];</span><br><span class="line">for(var item of arr)&#123;	</span><br><span class="line">    console.log(item.name,item.age);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpUWiq.png" alt="kpUWiq.png"><br><strong>说明：</strong>遍历数组中的每一项，每一项为对象</p>
+<ol>
+<li>与for in的区别</li>
+</ol>
+<h6 id="区别1：for-of无法打印对象"><a href="#区别1：for-of无法打印对象" class="headerlink" title="区别1：for of无法打印对象"></a>区别1：for of无法打印对象</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var userMsg = &#123;</span><br><span class="line">    0: &apos;nick&apos;,</span><br><span class="line">    1: &apos;freddy&apos;,</span><br><span class="line">    2: &apos;mike&apos;,	</span><br><span class="line">    3: &apos;james&apos;</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">for(var key in userMsg)&#123;</span><br><span class="line">    console.log(key, userMsg[key]);	</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;-----------分割线-----------&apos;);</span><br><span class="line">for(var item of userMsg)&#123;	</span><br><span class="line">    console.log(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpam6S.png" alt="kpam6S.png"></p>
+<h6 id="区别2：for-in会遍历自定义属性-for-of不会"><a href="#区别2：for-in会遍历自定义属性-for-of不会" class="headerlink" title="区别2：for in会遍历自定义属性 for of不会"></a>区别2：for in会遍历自定义属性 for of不会</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let arr = [&apos;nick&apos;,&apos;freddy&apos;,&apos;mike&apos;,&apos;james&apos;];</span><br><span class="line">arr.name = &quot;数组&quot;;</span><br><span class="line"> </span><br><span class="line">for(var key in arr)&#123;</span><br><span class="line">    console.log(key+&apos;: &apos;+arr[key]);	</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;-----------分割线-----------&apos;);</span><br><span class="line">for(var item of arr)&#123;	</span><br><span class="line">    console.log(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpayp6.png" alt="kpayp6.png"></p>
+<h3 id="5-map方法"><a href="#5-map方法" class="headerlink" title="5.map方法"></a>5.map方法</h3><p> array.map(callback,[ thisObject]);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let data = [1, 2, 3, 4];</span><br><span class="line">let res=data.map((item,index)=&gt;&#123;</span><br><span class="line">    return item*(index+1)</span><br><span class="line">&#125;);</span><br><span class="line">console.log(data)</span><br><span class="line">console.log(res)</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpaHc8.png" alt="kpaHc8.png"><br><strong>说明：</strong><br>返回值：返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。<br>是否改变原数组：不改变原数组<br>常用场景：常用于对数组的每一项做相同的操作并返回一个新的数组</p>
+<h3 id="6-filter方法"><a href="#6-filter方法" class="headerlink" title="6.filter方法"></a>6.filter方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr3=[56,23,44,2,3,4];</span><br><span class="line">let i=0;</span><br><span class="line">let res3=arr3.filter((item,index)=&gt;&#123; </span><br><span class="line">    return item&gt;4</span><br><span class="line">&#125;)</span><br><span class="line">console.log(arr3)</span><br><span class="line">console.log(res3)</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpdAHJ.png" alt="kpdAHJ.png"><br><strong>说明：</strong><br>返回值：返回一个由原数组中的每个元素调用过滤方法后的返回值组成的新数组。<br>是否改变原数组：不改变原数组<br>常用场景：常用于在数组中查找符合条件的项，并返回一个新数组</p>
+<h3 id="7-some方法"><a href="#7-some方法" class="headerlink" title="7.some方法"></a>7.some方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let arr=[1,2,3,4,5,6];</span><br><span class="line">let i=0</span><br><span class="line">let res=arr.some((item,index)=&gt;&#123;</span><br><span class="line">    i++</span><br><span class="line">    return item&gt;1&amp;&amp;item&lt;4</span><br><span class="line">&#125;)</span><br><span class="line">console.log(i)</span><br><span class="line">console.log(arr)</span><br><span class="line">console.log(res)</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpwFRP.png" alt="kpwFRP.png"><br><strong>说明：</strong><br>返回值：为数组中的每一个元素执行一次 callback 函数，直到找到一个使得 callback 返回一个“真值”（即可转换为布尔值 true 的值）。如果找到了这样一个值，some 将会立即返回 true。<br>注意：some如果遇到 true 就不再执行了。<br>是否改变原数组：不改变原数组<br>常用场景：常用于在数组中查找符合条件的唯一项，例如根据id查找某一项，如果 return true，就会立即终止这个数组的后续循环</p>
+<h3 id="8-ervery方法"><a href="#8-ervery方法" class="headerlink" title="8.ervery方法"></a>8.ervery方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let arr=[1,2,3,4,5,6];</span><br><span class="line">let i=0</span><br><span class="line">let res=arr.every((item,index)=&gt;&#123;</span><br><span class="line">    i++</span><br><span class="line">    return item&gt;2&amp;&amp;item&lt;4</span><br><span class="line">&#125;)</span><br><span class="line">console.log(i)</span><br><span class="line">console.log(arr)</span><br><span class="line">console.log(res)</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpw8MT.png" alt="kpw8MT.png"><br><strong>说明：</strong><br>返回值：返回值全部为true every方法返回true，遇到返回值为false则返回false 并不再继续遍历<br>是否改变原数组：不改变原数组</p>
+<h4 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h4><h3 id="each循环"><a href="#each循环" class="headerlink" title="each循环"></a>each循环</h3><p>jquery下的each方法有两种，一种为\$(‘’).each(),jquery对象方法，用于循环遍历jquery对象。</p>
+<p>一种为\$.each()循环方法，用于循环遍历数组、对象。<br>1.$(‘’).each()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    &lt;body&gt;</span><br><span class="line">	&lt;script src=&quot;https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;  </span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li&gt;li(1)&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;li(2)&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;li(3)&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(&apos;li&apos;).each(function(i,item) &#123;</span><br><span class="line">        console.log($(this).text());</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><img src="https://s2.ax1x.com/2019/01/17/kpNMjg.png" alt="kpNMjg.png"></p>
+<p><strong>说明：</strong>这里通过\$(this)获取到当前遍历到的jquery对象，并给他一个text()方法输出该标签里面的内容。</p>
+<p>2.\$.each()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&apos;nick&apos;,&apos;freddy&apos;,&apos;mike&apos;,&apos;james&apos;];</span><br><span class="line">var userMsg = &#123;</span><br><span class="line">	nick: &#123;</span><br><span class="line">		name: &apos;nick&apos;,</span><br><span class="line">		age: 18,</span><br><span class="line">		sex: &apos;男&apos;	</span><br><span class="line">	&#125;,</span><br><span class="line">	freddy: &#123;</span><br><span class="line">		name: &apos;freddy&apos;,</span><br><span class="line">		age: 24,</span><br><span class="line">		sex: &apos;男&apos;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;;</span><br><span class="line">$.each(arr,function(i,item)&#123;</span><br><span class="line">	console.log(i+&apos;. &apos;+item);</span><br><span class="line">&#125;);</span><br><span class="line">console.log(&apos;-----------分割线-----------&apos;);</span><br><span class="line">$.each(userMsg,function(i1,item1)&#123;</span><br><span class="line">	console.log(i1);</span><br><span class="line">	$.each(item1,function(i2,item2)&#123;</span><br><span class="line">		console.log(i2+&apos;: &apos;+item2);	</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>输出结果<br><img src="https://s2.ax1x.com/2019/01/17/kpNhKe.png" alt="kpNhKe.png"></p>
+<p><strong>说明：</strong>jquery把$.each()方法封装的很完美，使用起来更加清晰。跟for in 循环那里一样，i，i1，i2还是是目标对象（数组）中的键值（数组中叫习惯叫索引），而item1，item2则为该键值下的值，item1相当于是userMsg.nick 和userMsg.freddy。item2同理。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js基础/" rel="tag"># js基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/20/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/20/数组去重/" rel="prev" title="数组去重">
+                数组去重 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/lw.jpg" alt="littlewu">
+            
+              <p class="site-author-name" itemprop="name">littlewu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript中常用循环语句的详解"><span class="nav-number">1.</span> <span class="nav-text">JavaScript中常用循环语句的详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-for循环"><span class="nav-number">1.1.</span> <span class="nav-text">1. for循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-forEach方法"><span class="nav-number">1.2.</span> <span class="nav-text">2.forEach方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-for-in方法"><span class="nav-number">1.3.</span> <span class="nav-text">3.for in方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-for-of方法"><span class="nav-number">1.4.</span> <span class="nav-text">4.for of方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#区别1：for-of无法打印对象"><span class="nav-number">1.4.0.0.1.</span> <span class="nav-text">区别1：for of无法打印对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#区别2：for-in会遍历自定义属性-for-of不会"><span class="nav-number">1.4.0.0.2.</span> <span class="nav-text">区别2：for in会遍历自定义属性 for of不会</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#5-map方法"><span class="nav-number">1.5.</span> <span class="nav-text">5.map方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-filter方法"><span class="nav-number">1.6.</span> <span class="nav-text">6.filter方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-some方法"><span class="nav-number">1.7.</span> <span class="nav-text">7.some方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-ervery方法"><span class="nav-number">1.8.</span> <span class="nav-text">8.ervery方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充："><span class="nav-number">1.8.1.</span> <span class="nav-text">补充：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#each循环"><span class="nav-number">1.9.</span> <span class="nav-text">each循环</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">littlewu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
